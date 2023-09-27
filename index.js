@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const Room = require("./models/Room");
 const { Socket } = require("socket.io");
 const getWord = require("./api/getWord");
+const os = require("os");
 
 app.use(express.json());
 const DB =
@@ -196,6 +197,10 @@ io.on("connection", (socket) => {
 });
 
 server.listen(process.env.PORT || port, () => {
-  const address = server.address();
-  console.log("Server started and running on IP:" + address.address);
+  const networkInterfaces = os.networkInterfaces();
+  const ipAddress = Object.values(networkInterfaces)[0][0].address;
+
+  console.log(
+    "Server started and running on IP: " + ipAddress + ", Port: " + port
+  );
 });
