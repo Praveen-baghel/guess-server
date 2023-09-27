@@ -196,5 +196,6 @@ io.on("connection", (socket) => {
 });
 
 server.listen(process.env.PORT || port, () => {
-  console.log("Server started and running on port:" + port);
+  const address = server.address();
+  console.log("Server started and running on IP:" + address.address);
 });
